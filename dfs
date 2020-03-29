@@ -1,0 +1,28 @@
+def dfs(root):
+    visited = []
+    stc = [root]
+
+    while stc:
+        vert = stc.pop()
+        if vert not in visited:
+            visited.append(vert)
+            stc.extend(reversed(graph[vert]))
+    return visited
+
+
+vertex, edge, start = map(int, input().split())
+graph = dict()
+
+for _ in range(edge):
+    depart, desti = map(int, input().split())
+    if depart not in graph:
+        graph[depart] = [desti]
+    else:
+        graph[depart] += [desti]
+
+    if desti not in graph:
+        graph[desti] = [depart]
+    else:
+        graph[desti] += [depart]
+
+print(dfs(1))
